@@ -1,5 +1,4 @@
 var map;
-var test = "aaa";
 var isSelect = false;
 var select = [];
 
@@ -22,12 +21,11 @@ L.Map.include({
   setSelect: function(state) {
       isSelect = state;
       map.on('click', function(e) {
-        console.log("Kliiiik" + test);
         onMapClick(e);
       });
   },
   getBounds: function() {
-    return ""; // TODO return the bounds
+    return select; // TODO return the bounds
   }
 });
 
@@ -69,15 +67,13 @@ function onMapClick(e) {
 		//$('#header').trigger('create');
             }
         } 
-        console.log("You clicked the map at " + e.latlng.lat + " - " +e.latlng.lat);
-        console.log(map.getZoom());
+        //select[5] = map.getZoom();
     }
 }
 
 function dragBox(e, map) {
     id = e.target.id;
     coord1 = select[id].getLatLng();
-    console.log("LAT: " + coord1.lat);
     // Id's van de box markers
     //   0 ------ 2
     //   |        |
