@@ -1,0 +1,24 @@
+.circle {
+    border-radius: 50%;
+}
+
+.selector {
+    position: absolute;
+    --display: table;
+    margin: 0 auto;
+    margin-left:-7px;
+    margin-top:-7px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border: 4px solid #99f;
+}
+
+.clickable {
+    position: absolute;
+    left: -30px;
+    top: -30px;
+    height: 60px;
+    width: 60px;
+    --background: #000; remove to view click- / touchable  area
+}
