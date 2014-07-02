@@ -1,7 +1,7 @@
 var map;
 var isSelect = false;
 var select = [];
-
+var coords = [];
 
 var selectStyle = L.divIcon({ 
     iconSize: new L.Point(0, 0), 
@@ -26,7 +26,7 @@ L.Map.include({
       });
   },
   getSelectedArea: function() {
-    return select; // TODO return the bounds
+    return coords; // TODO return the bounds
   }
 });
 
@@ -53,13 +53,12 @@ function onMapClick(e) {
                 select[l].id = l;
                 select[l].on('drag', dragBox);
                 select[l].addTo(map); 
+                coords = [[coord1.lat, coord1.lng],
+                          [coord2.lat, coord1.lng],
+                          [coord2.lat, coord2.lng],
+                          [coord1.lat, coord2.lng]];
                 
-                
-                var polygon = L.polygon(
-                    [[coord1.lat, coord1.lng],
-                     [coord2.lat, coord1.lng],
-                     [coord2.lat, coord2.lng],
-                     [coord1.lat, coord2.lng]]);
+                var polygon = L.polygon(coords);
                 polygon.addTo(map);
                 l = select.length;
                 select[l] = polygon;
@@ -69,7 +68,7 @@ function onMapClick(e) {
     }
 }
 
-function dragBox(e, map) {
+function dragBox(e) {
     id = e.target.id;
     coord1 = select[id].getLatLng();
     // Id's van de box markers
