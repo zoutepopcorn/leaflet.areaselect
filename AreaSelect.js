@@ -14,6 +14,7 @@ L.Map.mergeOptions({
 
 L.Map.addInitHook(function () {
   map = this;
+  map.addEventListener("test");
 });
 
 
@@ -24,7 +25,7 @@ L.Map.include({
         onMapClick(e);
       });
   },
-  getBounds: function() {
+  getSelectedArea: function() {
     return select; // TODO return the bounds
   }
 });
@@ -62,12 +63,9 @@ function onMapClick(e) {
                 polygon.addTo(map);
                 l = select.length;
                 select[l] = polygon;
-		//$('#header').html($('#downBut').clone());
-		//console.log($('#downBut'));
-		//$('#header').trigger('create');
+                map.fire("selected");
             }
         } 
-        //select[5] = map.getZoom();
     }
 }
 
@@ -103,4 +101,5 @@ function dragBox(e, map) {
 	      [coord2.lat, coord2.lng],
 	      [coord1.lat, coord2.lng]];
     select[4].setLatLngs(coords);
+    map.fire("test");
 }
